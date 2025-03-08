@@ -9,6 +9,7 @@ private:
 
 public:
 
+	Counter() { setNum(1); }
 	Counter(int setNum) : num{ setNum } {}
 
 	int counterPlus(int setNum) { return ++setNum; }
@@ -33,6 +34,7 @@ int main()
 	char sign{};
 	std::string userInput{};
 
+	Counter c;
 	std::cout << "Вы хотите указать начальное значение счётчика? Введите да или нет: ";
 	std::cin >> userInput;
 
@@ -42,10 +44,14 @@ int main()
 		return 0;
 	}
 
-	std::cout << "Введите начальное значение счётчика: ";
-	std::cin >> num;
+	if (userInput == "да")
+	{
+		std::cout << "Введите начальное значение счётчика: ";
+		std::cin >> num;
+		c = Counter(num);
+	}
 
-	Counter counter(num);
+	//Counter counter(num);
 
 	std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
 	std::cin >> sign;
@@ -55,13 +61,13 @@ int main()
 		switch (sign)
 		{
 		case '+':
-			num = counter.counterPlus(num);
+			num = c.counterPlus(num);
 			break;
 		case '-':
-			num = counter.counterMinus(num);
+			num = c.counterMinus(num);
 			break;
 		case '=':
-			num = counter.counterEqual(num);
+			num = c.counterEqual(num);
 			std::cout << num << std::endl;
 			break;
 		}
